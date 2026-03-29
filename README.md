@@ -82,3 +82,26 @@ function generarArchivo() {
 }
 
 generarArchivo();
+
+
+function analizarTexto(texto) {
+    const caracteres = texto.length;
+    const palabras = texto.split(' ').length;
+    
+    const textoLower = texto.toLowerCase();
+    let vocales = 0;
+    let consonantes = 0;
+    
+    for (let i = 0; i < textoLower.length; i++) {
+        const char = textoLower[i];
+        if (char === 'a' || char === 'e' || char === 'i' || char === 'o' || char === 'u') {
+            vocales++;
+        } else if (char >= 'a' && char <= 'z') {
+            consonantes++;
+        }
+    }
+    
+    console.log({caracteres, palabras, vocales, consonantes});
+}
+
+analizarTexto("Hola mundo");
