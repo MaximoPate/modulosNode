@@ -1,4 +1,4 @@
- //Ejercicio 1 
+//Ejercicio 1 
 import fs from 'fs'; 
 
 console.log(`Contenido del archivo: ${fs.readFileSync('productos.json', 'utf-8')}`)
@@ -135,3 +135,22 @@ function analizarTexto(texto) {
 }
 
 analizarTexto("Hola mundo");  
+ 
+
+//Ejercicio 9
+
+function validarPassword(password) {
+    if (password.length >= 8 && /[0-9]/.test(password) && /[A-Z]/.test(password)) {
+        console.log('Password válida');
+    } else {
+        console.log('Password inválida');
+    }
+}
+
+// EJEMPLOS
+validarPassword('Abcdef12'); 
+validarPassword('abcdef12'); 
+validarPassword('ABCDEF12'); 
+validarPassword('Abc123');   
+
+
