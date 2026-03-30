@@ -1,26 +1,45 @@
-//Ejercicio 1 import fs from 'fs'; //console.log(Contenido del archivo: ${fs.readFileSync('productos.json', 'utf-8')})
+ //Ejercicio 1 
+import fs from 'fs'; 
 
-//Ejercicio 3 import dayjs from 'dayjs';
+console.log(`Contenido del archivo: ${fs.readFileSync('productos.json', 'utf-8')}`)
 
-function fechaHora() { const d = dayjs(); const year = d.get('year'); const month = d.get('month') + 1; const day = d.get('date'); const hour = d.get('hour'); const minute = d.get('minute'); const second = d.get('second'); console.log(Fecha y hora actual: ${String(day).padStart(2,'0')}/${String(month).padStart(2,'0')}/${year} ${String(hour).padStart(2,'0')}:${String(minute).padStart(2,'0')}:${String(second).padStart(2,'0')}); }
 
-// Llamada a la función fechaHora();
-
-/////////////////////////////////
-
-/* const fechaHora = () => { console.log(dayjs().get('month', 3).month()) // get & set } fechaHora() */
-
-//PARTE MELMAN
 
 //Ejercicio 2
 
-const agregarProducto = (nombre, precio) => { const contenido = fs.readFileSync('productos.json', 'utf-8'); const productos = JSON.parse(contenido); productos.push({ nombre, precio }); fs.writeFileSync('productos.json', JSON.stringify(productos));
-
+const agregarProducto = (nombre, precio) => { 
+    const contenido = fs.readFileSync('productos.json', 'utf-8');
+    const productos = JSON.parse(contenido);
+    productos.push({ nombre, precio });
+    fs.writeFileSync('productos.json', JSON.stringify(productos));
 }
 
-//EJEMPLO agregarProducto('Pilas AAA', 400); console.log(Contenido del archivo: ${fs.readFileSync('productos.json', 'utf-8')});
+//EJEMPLO 
+agregarProducto('Pilas AAA', 400); 
+console.log(`Contenido del archivo: ${fs.readFileSync('productos.json', 'utf-8')}`);
 
-//Ejercicio 4 import axios from 'axios'
+ 
+
+//Ejercicio 3 
+
+import dayjs from 'dayjs';
+
+// Función para mostrar fecha y hora actual con formato
+const mostrarFechaHora = () => {
+  const ahora = dayjs();
+  const fechaActual = ahora.format('DD/MM/YYYY');
+  const horaActual = ahora.format('HH:mm');
+
+  console.log(`Fecha actual: ${fechaActual}`);
+  console.log(`Hora actual: ${horaActual}`);
+}
+
+// Llamada a la función 
+mostrarFechaHora();
+
+
+
+//Ejercicio 4 
 
 async function obtenerPais(nombrePais) { try { const response = await axios.get(`https://restcountries.com/v3.1/name/${nombrePais}`)
 
@@ -37,10 +56,32 @@ async function obtenerPais(nombrePais) { try { const response = await axios.get(
 }
 
 obtenerPais("Argentina")
+ 
+
+//Ejercicio 5
+
+const buscarProducto = (nombre) => { 
+    const contenido = fs.readFileSync('productos.json', 'utf-8');
+    const productos = JSON.parse(contenido);
+    const productoEncontrado = productos.find(producto => producto.nombre === nombre);
+    
+    if (productoEncontrado) {
+        console.log("Producto encontrado");
+        console.log(`Nombre: ${productoEncontrado.nombre}`);
+        console.log(`Precio: ${productoEncontrado.precio}`);
+    } else {
+        console.log("Producto no encontrado");
+    }
+}
+
+// EJEMPLO
+buscarProducto("Mouse");
+
 
 //Ejercicio 6
 
-function generarArchivo() { const leer = fs.readFileSync('productos.json', 'utf-8'); let dataDeljson = JSON.parse(leer);
+function generarArchivo() { 
+const leer = fs.readFileSync('productos.json', 'utf-8'); let dataDeljson = JSON.parse(leer);
 
 let archivoCsv = "nombre,precio\n";
 
@@ -52,3 +93,45 @@ fs.writeFileSync("productos.csv", archivoCsv, "utf-8");
 }
 
 generarArchivo();
+
+
+ 
+
+//Ejercicio 7
+
+let contador = 1;
+
+const interval = setInterval(() => {
+    console.log(contador);
+    if (contador === 10) {
+        clearInterval(interval);
+        console.log("Fin del contador");
+    }
+    contador++;
+}, 1000); 
+
+
+
+//Ejercicio 8
+
+function analizarTexto(texto) {
+    const caracteres = texto.length;
+    const palabras = texto.split(' ').length;
+    
+    const textoLower = texto.toLowerCase();
+    let vocales = 0;
+    let consonantes = 0;
+    
+    for (let i = 0; i < textoLower.length; i++) {
+        const char = textoLower[i];
+        if (char === 'a' || char === 'e' || char === 'i' || char === 'o' || char === 'u') {
+            vocales++;
+        } else if (char >= 'a' && char <= 'z') {
+            consonantes++;
+        }
+    }
+    
+    console.log({caracteres, palabras, vocales, consonantes});
+}
+
+analizarTexto("Hola mundo");  
